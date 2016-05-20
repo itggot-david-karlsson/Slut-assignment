@@ -5,6 +5,6 @@ class User
   property :username, String, required: true
   property :password, String, required: true
 
-  has n, :priorites
+  has n, :prioritys
 
 end
