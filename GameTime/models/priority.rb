@@ -1,8 +1,10 @@
 class Priority
   include DataMapper::Resource
 
-  property :user_id, Serial
+  property :id, Serial
   property :class, Serial
-  property :milestone_id, Serial
+
+  belongs_to :user
+  has n, :milestones
 
 end
