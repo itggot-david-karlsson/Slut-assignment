@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+
+<h1>GameTime</h1>
+
+<ul>
+
+  <a href="/"><li>Homepage</li></a>
+  <a href="/milestones/1"><li>Milestones</li></a>
+  <a href="/Account"><li>Account - Temp</li></a>
+
+</ul>
+
+<%= yield %>
+
+<h1>Användare:</h1>
+<% for user in @users %>
+
+    <a href="/users/<%=user.username%>"><p><%= user.username %></p></a>
+
+<% end %>
+
+</body>
+</html>
