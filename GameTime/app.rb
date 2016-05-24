@@ -11,13 +11,15 @@ class App < Sinatra::Base
 
   get '/milestone/:id' do |milestone_id|
 
-    @milestone = Milestone.get(milestone_id)
+    @users = User.all
+    @milestone = Milestone.all(id: milestone_id)
     erb :'milestone_erb/milestone_page'
 
   end
 
-  get '/milestones/1' do
+  get '/milestones/list' do
 
+    @users = User.all
     erb :'milestone_erb/milestone_list'
 
   end
@@ -25,10 +27,13 @@ class App < Sinatra::Base
   get '/users/:username' do |username|
 
     @users = User.all
-    @user = User.get(username: username)
+    @profile = User.all(username: username)
     erb :'user_erb/user_profile'
 
   end
 
+  get '/Account' do
+    "Hello World"
+  end
 
 end

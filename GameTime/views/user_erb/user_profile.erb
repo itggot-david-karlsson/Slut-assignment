@@ -1,5 +1,3 @@
-<% for profile in @user %>
-
-    <h1><%= profile.username %></h1>
-
+<% @profile.each do |profile| %>
+  <h1> Username: <%= profile.username %> </h1>
 <% end %>

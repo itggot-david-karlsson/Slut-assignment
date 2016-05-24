@@ -3,21 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
+  <link rel="stylesheet" href="css/site_css.css" type="text/css" />
 </head>
 <body>
 
 
 <h1>GameTime</h1>
 
-<ul>
+<header>
+  <ul>
 
-  <a href="/"><li>Homepage</li></a>
-  <a href="/milestones/1"><li>Milestones</li></a>
-  <a href="/Account"><li>Account - Temp</li></a>
+    <li><a href="/">Homepage</a></li>
+    <li><a href="/milestones/list">Milestones</a></li>
+    <li><a href="/Account">Account - Temp</a></li>
 
-</ul>
+  </ul>
+</header>
 
-<%= yield %>
+<div id="content_container">
+  <div><%= yield %></div>
+</div>
 
 <h1>Användare:</h1>
 <% for user in @users %>
@@ -25,6 +30,10 @@
     <a href="/users/<%=user.username%>"><p><%= user.username %></p></a>
 
 <% end %>
+
+<footer>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aperiam, aspernatur atque beatae dolores dolorum ducimus eum exercitationem expedita, facere ipsum iusto natus quisquam quod, sit? Blanditiis obcaecati quam suscipit.</p>
+</footer>
 
 </body>
 </html>
