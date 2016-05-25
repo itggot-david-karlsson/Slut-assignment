@@ -1,4 +1,10 @@
-<a href="./create_milestone"><h1>Skapa milstolpe</h1></a>
-<a href="./search_milestone"><h1>Sök efter milstolpar</h1></a>
+<form action="/milestone/search" method="post">
+  <input type="text" name="name" placeholder="search" id="milestone_name">
+  <button type="submit" id="milestone_search">Sök efter milstolpar</button>
+</form>
 
-<h1>Här ska dina milstolpar stå vid inloggning</h1>
+<button type="submit">Skapa milstolpe</h1></button>
+
+<div id="milestone_list">
+  <h1>Här ska dina milstolpar stå vid inloggning</h1>
+</div>
