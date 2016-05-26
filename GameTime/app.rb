@@ -1,3 +1,5 @@
+require 'pry-byebug'
+
 class App < Sinatra::Base
   enable :sessions
 
@@ -32,8 +34,34 @@ class App < Sinatra::Base
 
   end
 
-  get '/Account' do
-    "Hello World"
+  get '/account' do
+    #binding.pry
+    @users = User.all
+      if session[:user_id]
+        @current_user = User.first(id: session[:user_id])
+        @number = session[:user_id]
+        erb :'account/logged_in'
+      else
+        erb :'account/login'
+      end
+
+  end
+
+  post '/login' do
+
+    user = User.first(username: params['username'])
+      if user && user.password == params['password']
+        session[:user_id] = user.id
+        redirect '/account'
+      else
+        redirect '/register'
+      end
+
+  end
+
+  post '/logout' do
+    session[:user_id] = nil
+    redirect '/'
   end
 
 end
