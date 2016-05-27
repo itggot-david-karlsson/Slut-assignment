@@ -17,9 +17,9 @@ class Seeder
   end
 
   def self.milestones
-    Milestone.create(name: 'will', priority_id: 1)
-    Milestone.create(name: 'shit', priority_id: 2)
-    Milestone.create(name: 'fly', priority_id: 1)
+    Milestone.create(name: 'will', description: 'ajdasjdas', priority_id: 1)
+    Milestone.create(name: 'shit', description: 'sadnosvdm', priority_id: 2)
+    Milestone.create(name: 'fly', description: 'preadsaf', priority_id: 1)
   end
 
 end

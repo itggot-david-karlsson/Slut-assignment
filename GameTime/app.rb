@@ -39,12 +39,24 @@ class App < Sinatra::Base
     @users = User.all
       if session[:user_id]
         @current_user = User.first(id: session[:user_id])
-        @number = session[:user_id]
         erb :'account/logged_in'
       else
         erb :'account/login'
       end
 
+  end
+
+  get '/register' do
+
+    @users = User.all
+    erb :'account/register'
+
+  end
+
+  post '/register_account' do
+
+    "Hello World"
+    
   end
 
   post '/login' do

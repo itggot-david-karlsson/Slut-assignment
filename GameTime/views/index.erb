@@ -1,8 +1,12 @@
-<% for milestone in @milestones %>
-
-    <a href="./milestone/<%=milestone.id%>">
-    <p><%= milestone.name %></p>
-    </a>
-
-<% end %>
-
+<table style="width: 100%">
+  <tr>
+    <th id="milestone">Milestone</th>
+    <th id="description">Description</th>
+  </tr>
+  <% for milestone in @milestones %>
+    <tr>
+      <td><a href="./milestone/<%=milestone.id%>"><%= milestone.name %></a></td>
+      <td><%= milestone.description %></td>
+    </tr>
+  <% end %>
+</table>

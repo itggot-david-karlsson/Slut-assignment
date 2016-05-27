@@ -38,9 +38,29 @@ header li a:hover {
     border-width: 3px;
     border-style: solid;
     border-color: black;
-    padding: 10px;
+    padding: 1%;
     background-color: white;
     border-top: none;
+}
+
+#content_container > div table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+#content_container > div th, td {
+    padding: 0.5%;
+}
+
+#content_container > div th {
+    color: white;
+    background-color: black;
+    border-color: white;
+    borde
+}
+
+#content_container > div #milestone {
+    width: 30%;
 }
 
 #content_container > div a {
@@ -49,43 +69,91 @@ header li a:hover {
     color: black;
 }
 
-#content_container > div input {
-    width: 40%;
-    padding: 15px 5px;
-    margin: 1px;
+#content_container > div .input {
+    width: 96%;
+    margin: auto;
+    padding: 0;
+    display: inline;
+    float: top;
+}
+
+#content_container > div .input input {
+    width: 99.5%;
+    padding: 15px 0;
     font-size: 16px;
     background-color: lightgrey;
     border: none;
     border-bottom: solid;
+    text-align: center;
+    margin-bottom: 1%;
 }
 
-#content_container > div input:focus {
+#content_container > div .input input:focus {
     background-color: white;
 }
 
-#content_container > div button {
+#content_container > div .input button {
     background-color: black;
     border-style: solid;
     border-width: 1px;
     border-color: black;
     color: white;
-    padding: 15px 32px;
-    margin: 1px;
+    padding: 10px 0;
     text-align: center;
     font-size: 16px;
+    margin: 0;
+    width: 49.5%;
+    display: inline;
 }
 
-#content_container > div button:hover {
+#content_container > div .input button:hover {
+    background-color: white;
+    border-color: black;
+    color: black;
+}
+
+#content_container > div #log_out button {
+    background-color: black;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 16px;
+    margin: 0;
+    width: 100%;
+    display: inline;
+}
+
+#content_container > div #log_out button:hover {
+    background-color: white;
+    color: black;
+}
+
+#content_container > div #register button {
+    background-color: black;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 16px;
+    margin: 0;
+    width: 99.5%;
+    display: inline;
+}
+
+#content_container > div #register button:hover {
     background-color: white;
     border-color: black;
     color: black;
 }
 
 #content_container > div #milestone_list {
-    border-style: solid;
-    border-width: 3px;
-    border-color: black;
-    width: 100%;
+    border: none black 2px;
+    width: 99%;
     padding: 10px 0;
 }
 
@@ -96,7 +164,7 @@ footer {
 
 footer > div {
     margin: auto;
-    padding: 10px;
+    padding: 1%;
     width: 57%;
     background-color: white;
     border-width: 3px;
