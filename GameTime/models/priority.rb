@@ -2,7 +2,7 @@ class Priority
   include DataMapper::Resource
 
   property :id, Serial
-  property :class, String
+  property :klass, String, required: true
 
   belongs_to :user
   has n, :milestones

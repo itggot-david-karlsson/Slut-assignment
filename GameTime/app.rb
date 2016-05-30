@@ -5,6 +5,12 @@ class App < Sinatra::Base
 
   get '/' do
 
+    if session[:user_id]
+      @account = (User.first(id: session[:user_id])).username
+    else
+      @account = "Log in/Register"
+    end
+
     @users = User.all
     @milestones = Milestone.all
     erb :index
@@ -12,6 +18,12 @@ class App < Sinatra::Base
   end
 
   get '/milestone/:id' do |milestone_id|
+
+    if session[:user_id]
+      @account = (User.first(id: session[:user_id])).username
+    else
+      @account = "Log in/Register"
+    end
 
     @users = User.all
     @milestone = Milestone.all(id: milestone_id)
@@ -21,12 +33,37 @@ class App < Sinatra::Base
 
   get '/milestones/list' do
 
+    if session[:user_id]
+      @account = (User.first(id: session[:user_id])).username
+    else
+      @account = "Log in/Register"
+    end
+
     @users = User.all
     erb :'milestone_erb/milestone_list'
 
   end
 
+  get '/create_milestone' do
+
+    if session[:user_id]
+      @account = (User.first(id: session[:user_id])).username
+    else
+      @account = "Log in/Register"
+    end
+
+    @users = User.all
+    erb :'milestone_erb/milestone_create'
+
+  end
+
   get '/users/:username' do |username|
+
+    if session[:user_id]
+      @account = (User.first(id: session[:user_id])).username
+    else
+      @account = "Log in/Register"
+    end
 
     @users = User.all
     @profile = User.all(username: username)
@@ -35,6 +72,13 @@ class App < Sinatra::Base
   end
 
   get '/account' do
+
+    if session[:user_id]
+      @account = (User.first(id: session[:user_id])).username
+    else
+      @account = "Log in/Register"
+    end
+
     #binding.pry
     @users = User.all
       if session[:user_id]
@@ -48,6 +92,12 @@ class App < Sinatra::Base
 
   get '/register' do
 
+    if session[:user_id]
+      @account = (User.first(id: session[:user_id])).username
+    else
+      @account = "Log in/Register"
+    end
+
     @users = User.all
     erb :'account/register'
 
@@ -55,8 +105,9 @@ class App < Sinatra::Base
 
   post '/register_account' do
 
-    "Hello World"
-    
+    User.create(username: params['username'], password: params['password'])
+    redirect '/account'
+
   end
 
   post '/login' do
@@ -74,6 +125,12 @@ class App < Sinatra::Base
   post '/logout' do
     session[:user_id] = nil
     redirect '/'
+  end
+
+  post '/create_the_milestone' do
+    Milestone.create(name: params['name'], description: params['description'], priority_id: 1 )
+    redirect '/'
+
   end
 
 end

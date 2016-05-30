@@ -12,8 +12,8 @@ class Seeder
   end
 
   def self.prioritys
-    Priority.create(class: '1', user_id: 1)
-    Priority.create(class: '2', user_id: 2)
+    Priority.create(klass: '1', user_id: 1)
+    Priority.create(klass: '2', user_id: 2)
   end
 
   def self.milestones

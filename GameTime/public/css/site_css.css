@@ -131,7 +131,7 @@ header li a:hover {
     color: black;
 }
 
-#content_container > div #register button {
+#content_container > div .wide_button button {
     background-color: black;
     border-style: solid;
     border-width: 1px;
@@ -145,7 +145,7 @@ header li a:hover {
     display: inline;
 }
 
-#content_container > div #register button:hover {
+#content_container > div .wide_button button:hover {
     background-color: white;
     border-color: black;
     color: black;
