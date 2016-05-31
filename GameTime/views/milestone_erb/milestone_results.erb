@@ -1,0 +1,12 @@
+<table style="width: 100%">
+  <tr>
+    <th id="milestone">Milestone</th>
+    <th id="description">Description</th>
+  </tr>
+  <% for result in @results %>
+      <tr>
+        <td><a href="./milestone/<%=result.id%>"><%= result.name %></a></td>
+        <td><%= result.description %></td>
+      </tr>
+  <% end %>
+</table>

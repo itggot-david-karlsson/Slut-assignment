@@ -1,0 +1,6 @@
+<h1><%= @milestone.name %></h1>
+<p><%= @milestone.description %></p>
+
+<form action="/my_milestone/delete/<%= @priority.id %>" method="post">
+  <div class="wide_button"><button type="submit">Delete milestone</button></div>
+</form>

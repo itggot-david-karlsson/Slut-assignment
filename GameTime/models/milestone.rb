@@ -5,6 +5,6 @@ class Milestone
   property :name, String, required: true
   property :description, Text, required: true
 
-  belongs_to :priority
+  has n, :prioritys
 
 end

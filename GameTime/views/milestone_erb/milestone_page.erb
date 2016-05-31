@@ -1,3 +1,9 @@
 <% for milestone in @milestone %>
-    <p><%= milestone.name %></p>
+    <h1><%= milestone.name %></h1>
+    <p><%= milestone.description %></p>
+
+    <form action="/add/<%= milestone.id %>" method="post">
+      <div class="wide_button"><button>Add this to my milestones</button></div>
+    </form>
+
 <% end %>

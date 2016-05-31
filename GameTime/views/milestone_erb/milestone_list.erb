@@ -1,11 +1,28 @@
 <div class="input">
-  <form action="/milestone/search" method="post">
-    <input type="text" name="name" placeholder="search" id="milestone_name">
+  <form action="/milestone/search" method="get">
+    <input type="text" name="search" placeholder="search" id="milestone_name">
     <button type="submit" id="milestone_search">Sök efter milstolpar</button>
     <a href="/create_milestone"><button type="button">Skapa milstolpe</button></a>
   </form>
 </div>
 
 <div id="milestone_list">
-  <h1>Här ska dina milstolpar stå vid inloggning</h1>
+
+  <table style="width: 100%">
+    <tr>
+      <th id="milestone">Milestone</th>
+      <th id="description">Description</th>
+    </tr>
+    <% for priority in @prioritys %>
+        <% for milestone in @milestones %>
+            <% if milestone.id == priority.milestone_id %>
+                <tr>
+                  <td><a href="/my_milestone/<%= priority.milestone_id %>"><%= milestone.name %></a></td>
+                  <td><%= milestone.description %></td>
+                </tr>
+            <% end %>
+        <% end %>
+    <% end %>
+  </table>
+
 </div>

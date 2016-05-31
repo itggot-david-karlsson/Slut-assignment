@@ -17,6 +17,27 @@ class App < Sinatra::Base
 
   end
 
+  get '/milestone/search' do
+
+    if session[:user_id]
+      @account = (User.first(id: session[:user_id])).username
+    else
+      @account = "Log in/Register"
+    end
+
+    @users = User.all
+    @results = Milestone.all(:name.like => params['search'])
+
+    erb :'milestone_erb/milestone_results'
+
+  end
+
+  post '/add/:id' do |milestone_id|
+
+    Priority.create(klass: '1', user_id: session[:user_id], milestone_id: milestone_id)
+
+  end
+
   get '/milestone/:id' do |milestone_id|
 
     if session[:user_id]
@@ -39,8 +60,25 @@ class App < Sinatra::Base
       @account = "Log in/Register"
     end
 
+    @prioritys = Priority.all(user_id: session[:user_id])
+    @milestones = Milestone.all
     @users = User.all
     erb :'milestone_erb/milestone_list'
+
+  end
+
+  post '/my_milestone/delete/:del' do |del|
+
+    Priority.first(id: del).destroy
+
+  end
+
+  get '/my_milestone/:id' do |priority|
+
+    @priority = Priority.first(milestone_id: priority)
+    @milestone = Milestone.first(id: priority)
+    @users = User.all
+    erb :'milestone_erb/my_milestone'
 
   end
 
@@ -128,9 +166,17 @@ class App < Sinatra::Base
   end
 
   post '/create_the_milestone' do
-    Milestone.create(name: params['name'], description: params['description'], priority_id: 1 )
-    redirect '/'
 
+    if session[:user_id]
+      @account = (User.first(id: session[:user_id])).username
+    else
+      redirect '/register'
+    end
+
+    puts "\n"
+    Milestone.create(name: params['name'], description: params['description'])
+    puts "\n"
+    redirect '/'
   end
 
 end
