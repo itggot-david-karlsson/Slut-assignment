@@ -4,6 +4,11 @@ html, body {
     background-color: dimgray;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 header ul {
     list-style-type: none;
     margin: 0;

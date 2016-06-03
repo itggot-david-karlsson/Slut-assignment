@@ -1,12 +1,26 @@
-<table style="width: 100%">
-  <tr>
-    <th id="milestone">Milestone</th>
-    <th id="description">Description</th>
-  </tr>
-  <% for milestone in @milestones %>
-    <tr>
-      <td><a href="./milestone/<%=milestone.id%>"><%= milestone.name %></a></td>
-      <td><%= milestone.description %></td>
-    </tr>
-  <% end %>
-</table>
+<h2>GameTime</h2>
+<h3>Search for milestones, create milestones, and set up milestones in your own priorityclasses! GameTime helps you become better at gaming</h3>
+
+<img class="mySlides" src="/img/praise_images/praise_picture_1.jpg">
+<img class="mySlides" src="/img/praise_images/praise_picture_2.jpg">
+<img class="mySlides" src="/img/praise_images/praise_picture_3.jpg">
+<img class="mySlides" src="/img/praise_images/praise_picture_4.jpg">
+
+<p>GameTime Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque blanditiis cum est ipsa libero perferendis quas. Aperiam at cum fuga labore necessitatibus obcaecati, officia officiis omnis, placeat qui reiciendis temporibus.Cum eaque laborum maiores modi necessitatibus totam. A ex fuga illum necessitatibus nemo nostrum odit pariatur quod reiciendis sit? Accusantium delectus ducimus eaque eius explicabo fuga optio quis suscipit tempore!</p>
+
+<script>
+  var slideIndex = 0;
+  carousel();
+
+  function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > x.length) {slideIndex = 1}
+    x[slideIndex-1].style.display = "block";
+    setTimeout(carousel, 5000);
+  }
+</script>
