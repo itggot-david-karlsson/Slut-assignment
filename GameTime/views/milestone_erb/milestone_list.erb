@@ -8,16 +8,75 @@
 
 <div id="milestone_list">
 
+    <h1>Priorityclass 1:</h1>
+
+    <table style="width: 100%">
+    <tr>
+      <th id="milestone">Milestone</th>
+      <th id="description">Description</th>
+    </tr>
+    <% for priority in @klass_1 %>
+        <% for milestone in @milestones %>
+            <% if milestone.id == priority.milestone_id %>
+                <tr>
+                  <td><a href="/my_milestone/<%= priority.id %>"><%= milestone.name %></a></td>
+                  <td><%= milestone.description %></td>
+                </tr>
+            <% end %>
+        <% end %>
+    <% end %>
+  </table>
+
+  <h1>Priorityclass 2:</h1>
+
   <table style="width: 100%">
     <tr>
       <th id="milestone">Milestone</th>
       <th id="description">Description</th>
     </tr>
-    <% for priority in @prioritys %>
+    <% for priority in @klass_2 %>
         <% for milestone in @milestones %>
             <% if milestone.id == priority.milestone_id %>
                 <tr>
-                  <td><a href="/my_milestone/<%= priority.milestone_id %>"><%= milestone.name %></a></td>
+                  <td><a href="/my_milestone/<%= priority.id %>"><%= milestone.name %></a></td>
+                  <td><%= milestone.description %></td>
+                </tr>
+            <% end %>
+        <% end %>
+    <% end %>
+  </table>
+
+  <h1>Priorityclass 3:</h1>
+
+  <table style="width: 100%">
+    <tr>
+      <th id="milestone">Milestone</th>
+      <th id="description">Description</th>
+    </tr>
+    <% for priority in @klass_3 %>
+        <% for milestone in @milestones %>
+            <% if milestone.id == priority.milestone_id %>
+                <tr>
+                  <td><a href="/my_milestone/<%= priority.id %>"><%= milestone.name %></a></td>
+                  <td><%= milestone.description %></td>
+                </tr>
+            <% end %>
+        <% end %>
+    <% end %>
+  </table>
+
+  <h1>Priorityclass 4:</h1>
+
+  <table style="width: 100%">
+    <tr>
+      <th id="milestone">Milestone</th>
+      <th id="description">Description</th>
+    </tr>
+    <% for priority in @klass_4 %>
+        <% for milestone in @milestones %>
+            <% if milestone.id == priority.milestone_id %>
+                <tr>
+                  <td><a href="/my_milestone/<%= priority.id %>"><%= milestone.name %></a></td>
                   <td><%= milestone.description %></td>
                 </tr>
             <% end %>

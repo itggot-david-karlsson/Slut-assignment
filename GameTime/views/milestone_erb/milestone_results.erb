@@ -1,3 +1,13 @@
+<div class="input">
+  <form action="/milestone/search" method="get">
+    <input type="text" name="search" placeholder="search" id="milestone_name">
+    <button type="submit" id="milestone_search">Sök efter milstolpar</button>
+    <a href="/create_milestone"><button type="button">Skapa milstolpe</button></a>
+  </form>
+</div>
+
+<br><br>
+
 <table style="width: 100%">
   <tr>
     <th id="milestone">Milestone</th>
@@ -5,7 +15,7 @@
   </tr>
   <% for result in @results %>
       <tr>
-        <td><a href="./milestone/<%=result.id%>"><%= result.name %></a></td>
+        <td><a href="/milestone/<%=result.id%>"><%= result.name %></a></td>
         <td><%= result.description %></td>
       </tr>
   <% end %>

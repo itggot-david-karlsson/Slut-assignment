@@ -1,6 +1,7 @@
 html, body {
     margin: 0;
     padding: 0;
+    background-color: dimgray;
 }
 
 header ul {
@@ -171,4 +172,49 @@ footer > div {
     border-style: solid;
     border-color: black;
     border-top: none;
+}
+
+@media (max-width: 600px) {
+
+    header ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        background-color: black;
+        text-align: center;
+    }
+
+    header li {
+        display: block;
+    }
+
+    header li a {
+        border-top-style: dashed;
+        border-top-width: 3px;
+        border-top-color: white;
+        width: 90%;
+        color: white;
+    }
+
+    #content_container > div {
+        width: 98%;
+        border: none;
+        padding: 1%;
+    }
+
+    footer {
+        width: 98%;
+        border: none;
+        padding: none;
+        border-top-style: solid;
+        border-top-color: black;
+        border-top-width: 3px;
+    }
+
+    footer > div {
+        padding: 1%;
+        width: 100%;
+        border: none;
+    }
+
 }

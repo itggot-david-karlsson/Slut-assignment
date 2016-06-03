@@ -11,7 +11,6 @@ class App < Sinatra::Base
       @account = "Log in/Register"
     end
 
-    @users = User.all
     @milestones = Milestone.all
     erb :index
 
@@ -22,10 +21,9 @@ class App < Sinatra::Base
     if session[:user_id]
       @account = (User.first(id: session[:user_id])).username
     else
-      @account = "Log in/Register"
+      redirect '/account'
     end
 
-    @users = User.all
     @results = Milestone.all(:name.like => params['search'])
 
     erb :'milestone_erb/milestone_results'
@@ -34,7 +32,7 @@ class App < Sinatra::Base
 
   post '/add/:id' do |milestone_id|
 
-    Priority.create(klass: '1', user_id: session[:user_id], milestone_id: milestone_id)
+    Priority.create(klass: params['klass'], user_id: session[:user_id], milestone_id: milestone_id)
 
   end
 
@@ -43,10 +41,9 @@ class App < Sinatra::Base
     if session[:user_id]
       @account = (User.first(id: session[:user_id])).username
     else
-      @account = "Log in/Register"
+      redirect '/account/p'
     end
 
-    @users = User.all
     @milestone = Milestone.all(id: milestone_id)
     erb :'milestone_erb/milestone_page'
 
@@ -57,12 +54,28 @@ class App < Sinatra::Base
     if session[:user_id]
       @account = (User.first(id: session[:user_id])).username
     else
-      @account = "Log in/Register"
+      redirect '/account/p'
     end
 
     @prioritys = Priority.all(user_id: session[:user_id])
     @milestones = Milestone.all
-    @users = User.all
+    @klass_1 = []
+    @klass_2 = []
+    @klass_3 = []
+    @klass_4 = []
+
+    for priority in Priority.all(user_id: session[:user_id])
+      if priority.klass == "1"
+        @klass_1.insert(-1, priority)
+      elsif priority.klass == "2"
+        @klass_2.insert(-1, priority)
+      elsif priority.klass == "3"
+        @klass_3.insert(-1, priority)
+      elsif priority.klass == "4"
+        @klass_4.insert(-1, priority)
+      end
+    end
+
     erb :'milestone_erb/milestone_list'
 
   end
@@ -75,9 +88,14 @@ class App < Sinatra::Base
 
   get '/my_milestone/:id' do |priority|
 
-    @priority = Priority.first(milestone_id: priority)
-    @milestone = Milestone.first(id: priority)
-    @users = User.all
+    if session[:user_id]
+      @account = (User.first(id: session[:user_id])).username
+    else
+      redirect '/account'
+    end
+
+    @priority = Priority.first(id: priority)
+    @milestone = Milestone.first(id: @priority.milestone_id)
     erb :'milestone_erb/my_milestone'
 
   end
@@ -87,10 +105,9 @@ class App < Sinatra::Base
     if session[:user_id]
       @account = (User.first(id: session[:user_id])).username
     else
-      @account = "Log in/Register"
+      redirect '/account'
     end
 
-    @users = User.all
     erb :'milestone_erb/milestone_create'
 
   end
@@ -100,16 +117,15 @@ class App < Sinatra::Base
     if session[:user_id]
       @account = (User.first(id: session[:user_id])).username
     else
-      @account = "Log in/Register"
+      redirect '/account'
     end
 
-    @users = User.all
     @profile = User.all(username: username)
     erb :'user_erb/user_profile'
 
   end
 
-  get '/account' do
+  get '/account/:message' do |message|
 
     if session[:user_id]
       @account = (User.first(id: session[:user_id])).username
@@ -117,34 +133,72 @@ class App < Sinatra::Base
       @account = "Log in/Register"
     end
 
-    #binding.pry
-    @users = User.all
-      if session[:user_id]
-        @current_user = User.first(id: session[:user_id])
-        erb :'account/logged_in'
-      else
-        erb :'account/login'
-      end
+    if message == 'no_usr_pswrd'
+      @message = "No username or password input."
+    elsif message == 'no_username'
+      @message = "Username can't be blank."
+    elsif message == 'no_password'
+      @message = "Password can't be blank."
+    elsif message == 'wrong'
+      @message = "Wrong username or password."
+    elsif message == 'p'
+      @message = "Please log in or press the register-button."
+    else
+    end
+
+    if session[:user_id]
+      @current_user = User.first(id: session[:user_id])
+      erb :'account/logged_in'
+    else
+      erb :'account/login'
+    end
 
   end
 
-  get '/register' do
+  get '/register/:message' do |message|
+
+    if message == 'no_usr_pswrd'
+      @message = "No username or password input."
+    elsif message == 'no_username'
+      @message = "Username can't be blank."
+    elsif message == 'no_password'
+      @message = "Password can't be blank."
+    elsif message == 'p'
+      @message = "Please type in a username and password and press the register-button."
+    elsif message == 'usr_exist'
+      @message = "Username already taken by someone else."
+    else
+    end
 
     if session[:user_id]
       @account = (User.first(id: session[:user_id])).username
+      redirect
     else
       @account = "Log in/Register"
     end
 
-    @users = User.all
     erb :'account/register'
 
   end
 
   post '/register_account' do
 
-    User.create(username: params['username'], password: params['password'])
-    redirect '/account'
+    if User.first(username: params['username'])
+      redirect '/register/usr_exist'
+    else
+      if params['username'] != '' && params['password'] != ''
+        User.create(username: params['username'], password: params['password'])
+        redirect '/account/p'
+      elsif params['username'] == ''
+        if params['password'] == ''
+          redirect '/register/no_usr_pswrd'
+        else
+          redirect '/register/no_username'
+        end
+      elsif params['password'] == ''
+        redirect '/register/no_password'
+      end
+    end
 
   end
 
@@ -153,10 +207,25 @@ class App < Sinatra::Base
     user = User.first(username: params['username'])
       if user && user.password == params['password']
         session[:user_id] = user.id
-        redirect '/account'
+        redirect '/account/logged_in'
       else
-        redirect '/register'
+        # redirect '/account'
+        if params['username'] == ''
+          if params['password'] == ''
+            redirect '/account/no_usr_pswrd'
+          else
+            redirect '/account/no_username'
+          end
+        elsif params['password'] == ''
+          redirect '/account/no_password'
+        else
+          redirect '/account/wrong'
+        end
       end
+
+    p "\n"*3
+    p "#{params['username']}"
+    p "\n"*3
 
   end
 
@@ -170,7 +239,7 @@ class App < Sinatra::Base
     if session[:user_id]
       @account = (User.first(id: session[:user_id])).username
     else
-      redirect '/register'
+      redirect '/account/p'
     end
 
     puts "\n"
