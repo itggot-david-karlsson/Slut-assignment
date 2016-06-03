@@ -31,6 +31,7 @@ class App < Sinatra::Base
   post '/add/:id' do |milestone_id|
 
     Priority.create(klass: params['klass'], user_id: session[:user_id], milestone_id: milestone_id)
+    redirect '/milestones/list'
 
   end
 
@@ -81,6 +82,7 @@ class App < Sinatra::Base
   post '/my_milestone/delete/:del' do |del|
 
     Priority.first(id: del).destroy
+    redirect '/milestones/list'
 
   end
 
