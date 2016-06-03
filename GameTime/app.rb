@@ -242,10 +242,8 @@ class App < Sinatra::Base
       redirect '/account/p'
     end
 
-    puts "\n"
     Milestone.create(name: params['name'], description: params['description'])
-    puts "\n"
-    redirect '/'
+    redirect "/milestone/#{(Milestone.first(name: params['name'], description: params['description'])).id}"
   end
 
 end
